@@ -6,6 +6,9 @@
   "repository": "https://github.com/Alamantus/time-to-page.git",
   "author": "Robbie Antenesse <dev@alamantus.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "parcel index.html"
+  },
   "dependencies": {
     "bootstrap": "^4.4.1",
     "react": "^16.12.0",

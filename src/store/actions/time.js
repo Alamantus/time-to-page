@@ -1,0 +1,1 @@
+export const CHECK_TIME = 'CHECK_TIME';
