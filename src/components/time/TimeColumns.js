@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 const TimeColumns = (props) => {
   const idPrefix = props.idPrefix;
+  const useHours = typeof props.hours !== 'undefined';
 
   const updateHours = value => {
     if (isNaN(value)) value = 0;
@@ -12,15 +13,19 @@ const TimeColumns = (props) => {
   const updateMinutes = value => {
     if (isNaN(value)) value = 0;
     if (value < 0) {
-      if (props.hours > 0) {
+      if (useHours && props.hours > 0) {
         updateHours(props.hours - 1);
         value = 59;
       } else {
         value = 0;
       }
     } else if (value > 59) {
-      updateHours(props.hours + 1);
-      value = 0;
+      if (useHours) {
+        updateHours(props.hours + 1);
+        value = 0;
+      } else {
+        value = 59
+      }
     }
     props.updateMinutes(value);
   }
@@ -28,29 +33,35 @@ const TimeColumns = (props) => {
   const updateSeconds = value => {
     if (isNaN(value)) value = 0;
     if (value < 0) {
-      if (props.minutes > 0) {
+      if (useHours || props.minutes > 0) {
         updateMinutes(props.minutes - 1);
         value = 59;
       } else {
         value = 0;
       }
     } else if (value > 59) {
-      updateMinutes(props.minutes + 1);
-      value = 0;
+      if (useHours || props.minutes < 59) {
+        updateMinutes(props.minutes + 1);
+        value = 0;
+      } else {
+        value = 59
+      }
     }
     props.updateSeconds(value);
   }
 
   return <article className="row">
-    <div className="col form-group">
-      <label htmlFor={idPrefix + 'Hours'}>Hours</label>
-      <input className="form-control" id={idPrefix + 'Hours'}
-        type="number" step="1" min="0"
-        value={props.hours}
-        onFocus={event => event.target.select()}
-        onChange={event => updateHours(parseInt(event.target.value))}
-      />
-    </div>
+    {useHours && (
+      <div className="col form-group">
+        <label htmlFor={idPrefix + 'Hours'}>Hours</label>
+        <input className="form-control" id={idPrefix + 'Hours'}
+          type="number" step="1" min="0"
+          value={props.hours}
+          onFocus={event => event.target.select()}
+          onChange={event => updateHours(parseInt(event.target.value))}
+        />
+      </div>
+    )}
     <div className="col form-group">
       <label htmlFor={idPrefix + 'Minutes'}>Minutes</label>
       <input className="form-control" id={idPrefix + 'Minutes'}
@@ -73,20 +84,18 @@ const TimeColumns = (props) => {
 }
 
 TimeColumns.defaultProps = {
-  hours: 0,
   minutes: 0,
   seconds: 0,
-  updateHours: () => { console.log('Missing updateHours()') },
-  updateMinutes: () => { console.log('Missing updateMinutes()') },
-  updateSeconds: () => { console.log('Missing updateSeconds()') },
+  updateMinutes: () => { console.error('Missing updateMinutes()') },
+  updateSeconds: () => { console.error('Missing updateSeconds()') },
 }
 
 TimeColumns.propTypes = {
   idPrefix: PropTypes.string.isRequired,
-  hours: PropTypes.number.isRequired,
+  hours: PropTypes.number,
   minutes: PropTypes.number.isRequired,
   seconds: PropTypes.number.isRequired,
-  updateHours: PropTypes.func.isRequired,
+  updateHours: PropTypes.func,
   updateMinutes: PropTypes.func.isRequired,
   updateSeconds: PropTypes.func.isRequired,
 }
