@@ -1,7 +1,8 @@
 import React from 'react';
 
 import Header from './components/Header';
-import TimeSection from './components/time';
+import SetupSection from './components/SetupSection';
+import CalculatorSection from './components/CalculatorSection';
 import HelpModal from './components/HelpModal';
 
 class App extends React.Component {
@@ -44,8 +45,8 @@ class App extends React.Component {
       />
       {
         this.state.showSetup === true
-        ? <div />
-        : <TimeSection />
+        ? <SetupSection />
+        : <CalculatorSection />
       }
       {this.state.showHelp && <HelpModal hideHelp={this.hideHelp} />}
     </main>;

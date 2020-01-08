@@ -36,7 +36,7 @@ class ListenedTime extends React.Component {
   render () {
     return <article className="card">
       <section className="card-body">
-        <article className="row">
+        <header className="row">
           <div className="col-md-3">
             <h2>Time Listened</h2>
           </div>
@@ -56,7 +56,7 @@ class ListenedTime extends React.Component {
               </li>
             </ul>
           </nav>
-        </article>
+        </header>
         {
           this.state.showPercentListened === false
           ? <TimeColumns
