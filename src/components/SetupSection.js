@@ -2,6 +2,7 @@ import React from 'react';
 
 import TotalTime from './time/TotalTime';
 import FineTuneTime from './time/FineTuneTime';
+import TotalPages from './pages/TotalPages';
 
 class SetupSection extends React.Component {
   constructor (props) {
@@ -21,6 +22,7 @@ class SetupSection extends React.Component {
   
   render () {
     return <section className="container-fluid">
+      <TotalPages />
       <TotalTime />
       <FineTuneTime
         isShown={this.state.showFineTuneSection}

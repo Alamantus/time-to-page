@@ -24,10 +24,8 @@ const mapDispatchToProps = {
 const TotalTime = (props) => {
   return <article className="card">
     <section className="card-body">
-      <header className="row">
-        <div className="col-md-3">
-          <h2>Total Time</h2>
-        </div>
+      <header>
+        <h2>Total Audiobook Time</h2>
       </header>
       <TimeColumns
         idPrefix='total'
