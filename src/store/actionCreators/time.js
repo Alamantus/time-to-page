@@ -30,11 +30,11 @@ export const updateListenedHours = hours => ({
 
 export const updateListenedPercent = percent => ({
   type: UPDATE_LISTENED_PERCENT,
-  percent: parseInt(percent) / 100,
+  percent: percent,
 });
 
 export const updateListenedTime = time => ({
-  type: UPDATE_LISTENED_HOURS,
+  type: UPDATE_LISTENED_TIME,
   time,
 });
 

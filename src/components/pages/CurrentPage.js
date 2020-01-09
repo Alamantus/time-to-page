@@ -28,6 +28,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   updatePage: updateReadPages,
   updateListenedTime,
+  updateListenedPercent,
 };
 
 const CurrentPage = (props) => {
