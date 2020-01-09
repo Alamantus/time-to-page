@@ -31,6 +31,12 @@ const reducer = (state = defaultState, action) => {
       newState.percent = action.percent;
       return newState;
     }
+    case UPDATE_LISTENED_TIME: {
+      newState.hours = action.time.hours;
+      newState.minutes = action.time.minutes;
+      newState.seconds = action.time.seconds;
+      return newState;
+    }
     default: return state;
   }
 }

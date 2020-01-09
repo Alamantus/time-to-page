@@ -26,6 +26,18 @@ export function GetPercentProgress (progress, total) {
   return progress / total;
 }
 
+export function GetTimeFromSeconds (secondsToSplit) {
+  const hours = Math.floor(secondsToSplit / 3600);
+  const minutes = Math.floor((secondsToSplit - (hours * 3600)) / 60);
+  const seconds = Math.floor(secondsToSplit - ((hours * 3600) + (minutes * 60)));
+
+  return {
+    hours,
+    minutes,
+    seconds
+  };
+}
+
 export function GetCurrentPageFromTime (totalPages, pageStart, listenedSeconds, totalSeconds) {
   const progress = GetPercentProgress(listenedSeconds, totalSeconds);
   const pagesRead = ((totalPages * progress) + (pageStart > 1 ? pageStart : 0)).toFixed(2);
@@ -40,13 +52,5 @@ export function GetCurrentTimeFromPage (currentPage, totalPages, pageStart, tota
   
   const listenedSeconds = (totalSeconds * progress) + introSeconds;
 
-  const hours = Math.floor(listenedSeconds / 3600);
-  const minutes = Math.floor((listenedSeconds - (hours * 3600)) / 60);
-  const seconds = Math.floor(listenedSeconds - ((hours * 3600) + (minutes * 60)));
-
-  return {
-    hours,
-    minutes,
-    seconds
-  }
+  return GetTimeFromSeconds(listenedSeconds);
 }
