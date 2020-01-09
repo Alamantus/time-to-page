@@ -17,6 +17,18 @@ const mapDispatchToProps = {
 };
 
 const TotalPages = (props) => {
+  const updateTotalPages = value => {
+    if (isNaN(value) || value < 0) value = 0;
+    props.updateTotalPages(value);
+  }
+  const updateStartPage = value => {
+    if (isNaN(value) || value < 0) value = 0;
+    if (value > props.total) {
+      value = props.total;
+    }
+    props.updateStartPages(value);
+  }
+
   return <article className="card">
     <section className="card-body">
       <header>
@@ -29,7 +41,7 @@ const TotalPages = (props) => {
             type="number" step="1" min="0"
             value={props.total}
             onFocus={event => event.target.select()}
-            onChange={event => props.updateTotalPages(parseInt(event.target.value))}
+            onChange={event => updateTotalPages(parseInt(event.target.value))}
           />
         </div>
         <div className="col form-group">
@@ -38,7 +50,7 @@ const TotalPages = (props) => {
             type="number" step="1" min="0"
             value={props.start}
             onFocus={event => event.target.select()}
-            onChange={event => props.updateStartPages(parseInt(event.target.value))}
+            onChange={event => updateStartPage(parseInt(event.target.value))}
           />
         </div>
       </article>

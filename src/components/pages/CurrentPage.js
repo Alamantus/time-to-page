@@ -33,6 +33,10 @@ const mapDispatchToProps = {
 
 const CurrentPage = (props) => {
   const updatePage = value => {
+    if (isNaN(value) || value < 0) value = 0;
+    if (value > props.totalPages) {
+      value = props.totalPages;
+    }
     props.updatePage(value);
 
     const { totalPages, startPage, totalTime, introTime, outroTime } = props;
