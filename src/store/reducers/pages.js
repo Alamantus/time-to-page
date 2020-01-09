@@ -14,15 +14,15 @@ const reducer = (state = defaultState, action) => {
   const newState = Object.assign({}, state);
   switch (action.type) {
     case UPDATE_READ_PAGES: {
-      newState.pages.read = action.pages;
+      newState.read = action.pages;
       return newState;
     }
     case UPDATE_TOTAL_PAGES: {
-      newState.pages.total = action.pages;
+      newState.total = action.pages;
       return newState;
     }
     case UPDATE_START_PAGES: {
-      newState.pages.start = action.pages;
+      newState.start = action.pages;
       return newState;
     }
     default: return state;
