@@ -29,11 +29,11 @@ const FineTuneTime = (props) => {
   return <article className="card">
     <div className="card-body">
       <header className="row">
-        <div className="col-md-auto">
-          <h3>Fine-Tune Time</h3>
+        <div className="col-auto">
+          <h3 className="h5">Fine-Tune Time</h3>
         </div>
-        <div className="col-md-auto">
-          <button className="btn btn-secondary" onClick={props.toggle}>
+        <div className="col-auto">
+          <button className="btn btn-secondary btn-sm" onClick={props.toggle}>
             { props.isShown ? 'Collapse' : 'Expand' }
           </button>
         </div>
@@ -41,10 +41,10 @@ const FineTuneTime = (props) => {
       {props.isShown && (
         <section>
           <header className="row">
-            <div className="col-md-auto">
-              <h4>Actual Start Time</h4>
+            <div className="col-auto">
+              <h4 className="h5">Actual Start Time</h4>
             </div>
-            <div className="col-md-auto">
+            <div className="col-auto">
               <button className="btn btn-secondary btn-sm" onClick={props.showStartHelp}
                 aria-label="Show Help Modal" title="Show Help Modal">
                 ?
@@ -59,10 +59,10 @@ const FineTuneTime = (props) => {
             updateSeconds={props.updateIntroSeconds}
           />
           <header className="row">
-            <div className="col-md-auto">
-              <h4>Time After Book Ends</h4>
+            <div className="col-auto">
+              <h4 className="h5">Time After Book Ends</h4>
             </div>
-            <div className="col-md-auto">
+            <div className="col-auto">
               <button className="btn btn-secondary btn-sm" onClick={props.showEndHelp}
                 aria-label="Show Help Modal" title="Show Help Modal">
                 ?

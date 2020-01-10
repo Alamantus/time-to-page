@@ -8,10 +8,10 @@ const ListenedTime = (props) => {
   return <article className="card">
     <section className="card-body">
       <header className="row">
-        <div className="col-md-auto">
-          <h2>Time Listened</h2>
+        <div className="col-auto">
+          <h2 className="h4">Time Listened</h2>
         </div>
-        <div className="col-md-auto">
+        <div className="col-auto">
           <button className="btn btn-secondary btn-sm" onClick={props.showHelp}
             aria-label="Show Help Modal" title="Show Help Modal">
             ?

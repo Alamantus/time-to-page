@@ -34,10 +34,10 @@ const TotalPages = (props) => {
   return <article className="card">
     <section className="card-body">
       <header className="row">
-        <div className="col-md-auto">
-          <h2>Book Pages</h2>
+        <div className="col-auto">
+          <h2 className="h4">Book Pages</h2>
         </div>
-        <div className="col-md-auto">
+        <div className="col-auto">
           <button className="btn btn-secondary btn-sm" onClick={props.showHelp}
             aria-label="Show Help Modal" title="Show Help Modal">
             ?
@@ -55,7 +55,7 @@ const TotalPages = (props) => {
           />
         </div>
         <div className="col form-group">
-          <label htmlFor="startPage">Text Starts on Page</label>
+          <label htmlFor="startPage">Text Start Page</label>
           <input className="form-control" id="startPage"
             type="number" step="1" min="0"
             value={props.start}
@@ -68,8 +68,12 @@ const TotalPages = (props) => {
     {props.helpIsShown && (
       <Modal title="Book Pages Help" hide={props.hideHelp}>
         <p>
-          Some books have extra text or afterwords after the main text of the
-          book has ended. Enter the last page number of the main text here.
+          Some books have extra text or afterwords after the main text of the book has
+          ended. Enter the last page number of the main text in the "Last Page" field.
+        </p>
+        <p>
+          Some books don't start on page 1. Specify what page your your book starts on
+          in the "Text Start Page" field to adjust your calculation.
         </p>
       </Modal>
     )}
