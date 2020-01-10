@@ -6,6 +6,8 @@ import {
   updateStartPages,
 } from '../../store/actionCreators/pages';
 
+import Modal from '../Modal';
+
 const mapStateToProps = (state) => ({
   total: state.pages.total,
   start: state.pages.start,

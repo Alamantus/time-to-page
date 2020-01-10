@@ -22,6 +22,6 @@ export const editSave = (settings, index) => ({
 });
 
 export const removeSave = index => ({
-  type: EDIT_SAVE,
+  type: REMOVE_SAVE,
   index,
 });
