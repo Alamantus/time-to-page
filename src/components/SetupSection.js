@@ -147,17 +147,19 @@ class SetupSection extends React.Component {
   
   render () {
     return <section className="container-fluid">
-      <nav className="nav nav-pills" style={{ marginBottom: '10px' }}>
-        <li className="nav-item">
-          <button className="btn btn-outline-dark btn-sm" onClick={() => this.setState({ showSavePanel: true })}>
-            Save Setup
-          </button>
-        </li>
-        <li className="nav-item">
-          <button className="btn btn-outline-dark btn-sm" onClick={this.loadAvailableSaves}>
-            Load Setup
-          </button>
-        </li>
+      <nav style={{ marginBottom: '10px' }}>
+        <ul className="nav nav-pills">
+          <li className="nav-item">
+            <button className="btn btn-outline-dark btn-sm" onClick={() => this.setState({ showSavePanel: true })}>
+              Save Setup
+            </button>
+          </li>
+          <li className="nav-item">
+            <button className="btn btn-outline-dark btn-sm" onClick={this.loadAvailableSaves}>
+              Load Setup
+            </button>
+          </li>
+        </ul>
       </nav>
       <TotalPages
         helpIsShown={this.state.showTotalPagesHelp}
@@ -201,7 +203,7 @@ class SetupSection extends React.Component {
                 const dateString = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
                 return <tr key={save.saved}>
                   <td>
-                    <a onClick={() => this.loadSpecificSave(index)} style={{ display: 'block', width: '100%', height: '100%'}}>
+                    <a href="#" onClick={() => this.loadSpecificSave(index)} style={{ textDecoration: 'underline' }}>
                       {save.name}
                     </a>
                   </td>

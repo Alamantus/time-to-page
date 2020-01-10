@@ -36,6 +36,24 @@ class App extends React.Component {
         ? <SetupSection />
         : <CalculatorSection />
       }
+      <nav className="container-fluid">
+        <ul className="nav justify-content-end">
+          <li className="nav-item">
+            {
+              this.state.showSetup === true
+              ? (
+                <a href="#" className="btn btn-primary" onClick={this.hideSetup}>
+                  Continue to Calculator &rarr;
+                </a>
+              ) : (
+                <a href="#" className="btn btn-primary" onClick={this.showSetup}>
+                  &larr; Go Back to Setup
+                </a>
+              )
+            }
+          </li>
+        </ul>
+      </nav>
     </main>;
   }
 }

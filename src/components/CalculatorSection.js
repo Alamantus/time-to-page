@@ -135,7 +135,7 @@ class CalculatorSection extends React.Component {
     }
     this.props.updateReadPages(value);
 
-    const { totalPages, startPage, totalTime, introTime, outroTime } = props;
+    const { totalPages, startPage, totalTime, introTime, outroTime } = this.props;
     const totalSeconds = GetTotalSeconds(totalTime, introTime, outroTime),
       introSeconds = CalculateSeconds(introTime);
 
