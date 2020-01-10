@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const modalStyle = {
-  display: 'block',
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-};
-
 const Modal = (props) => {
   const id = props.title.replace(/\s/, '-') + '_Modal';
-  return <div className="modal" style={modalStyle}
+  return <div className="modal" style={{ display: 'block' }}
     role="dialog" aria-labelledby="helpModalLabel"
-    onClick={props.hide}>
-    <div className="modal-dialog" role="document">
+  >
+    <div className="modal-backdrop" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }} onClick={props.hide} />
+    <div className="modal-dialog" style={{ zIndex: 1050 }} role="document">
       <div className="modal-content">
         <div className="modal-header">
           <h5 className="modal-title" id="helpModalLabel">{props.title}</h5>
@@ -23,6 +19,11 @@ const Modal = (props) => {
           {props.children}
         </div>
         <div className="modal-footer">
+          {props.confirmButtonText && (
+            <button type="button" className="btn btn-primary" onClick={props.confirmAction}>
+              {props.confirmButtonText}
+            </button>
+          )}
           <button type="button" className="btn btn-secondary" onClick={props.hide}>
             Close
           </button>
@@ -35,6 +36,8 @@ const Modal = (props) => {
 Modal.propTypes = {
   hide: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
+  confirmButtonText: PropTypes.string,
+  confirmAction: PropTypes.func,
 };
 
 export default Modal;
