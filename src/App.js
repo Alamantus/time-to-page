@@ -3,7 +3,6 @@ import React from 'react';
 import Header from './components/Header';
 import SetupSection from './components/SetupSection';
 import CalculatorSection from './components/CalculatorSection';
-import HelpModal from './components/HelpModal';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,8 +14,6 @@ class App extends React.Component {
 
     this.showSetup = this.showSetup.bind(this);
     this.hideSetup = this.hideSetup.bind(this);
-    this.showHelp = this.showHelp.bind(this);
-    this.hideHelp = this.hideHelp.bind(this);
   }
 
   showSetup () {
@@ -27,28 +24,18 @@ class App extends React.Component {
     this.setState({ showSetup: false });
   }
 
-  showHelp () {
-    this.setState({ showHelp: true });
-  }
-
-  hideHelp () {
-    this.setState({ showHelp: false });
-  }
-
   render () {
     return <main>
       <Header
         setupIsShown={this.state.showSetup}
         showSetup={this.showSetup}
         hideSetup={this.hideSetup}
-        showHelp={this.showHelp}
       />
       {
         this.state.showSetup === true
         ? <SetupSection />
         : <CalculatorSection />
       }
-      {this.state.showHelp && <HelpModal hideHelp={this.hideHelp} />}
     </main>;
   }
 }
