@@ -1,6 +1,7 @@
 import {
   UPDATE_OUTRO_SECONDS,
-  UPDATE_OUTRO_MINUTES
+  UPDATE_OUTRO_MINUTES,
+  UPDATE_OUTRO_TIME,
 } from '../../actions/time';
 
 const defaultState = {
@@ -17,6 +18,11 @@ const reducer = (state = defaultState, action) => {
     }
     case UPDATE_OUTRO_MINUTES: {
       newState.minutes = action.minutes;
+      return newState;
+    }
+    case UPDATE_OUTRO_TIME: {
+      newState.minutes = action.time.minutes;
+      newState.seconds = action.time.seconds;
       return newState;
     }
     default: return state;
