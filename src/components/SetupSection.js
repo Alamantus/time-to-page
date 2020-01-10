@@ -62,6 +62,8 @@ class SetupSection extends React.Component {
     this.savedSettingsKey = 'savedSettings';
 
     this.toggleFineTuneSection = this.toggleFineTuneSection.bind(this);
+    this.loadAvailableSaves = this.loadAvailableSaves.bind(this);
+    this.saveCurrentSetup = this.saveCurrentSetup.bind(this);
   }
 
   toggleFineTuneSection () {
@@ -93,10 +95,13 @@ class SetupSection extends React.Component {
       if (a.saved === b.saved) return 0;
       return a.saved > b.saved ? -1 : 1;
     });
-    
+
+    this.storeAvailableSaves(availableSaves)
+  }
+
+  storeAvailableSaves (availableSaves) {
     localForage.setItem(this.savedSettingsKey, availableSaves).then(value => {
-      console.log(value);
-      this.updateAvailableSaves(value);
+      this.props.updateAvailableSaves(value);
       this.setState({
         showSavePanel: false,
         saveNameInput: '',
@@ -109,8 +114,7 @@ class SetupSection extends React.Component {
   loadAvailableSaves () {
     localForage.getItem(this.savedSettingsKey).then(value => {
       if (value !== null) {
-        console.log(value);
-        this.updateAvailableSaves(value);
+        this.props.updateAvailableSaves(value);
       }
     })
     .catch(err => console.error(err))
@@ -132,10 +136,12 @@ class SetupSection extends React.Component {
   removeSpecificSave (index) {
     const confirmText = 'Are you sure you want to delete this saved book setup information?';
     if (confirm(confirmText)) {
-      this.props.removeSave(index);
-      localForage.setItem(this.savedSettingsKey, this.props.availableSaves).then(value => {
-        console.log(value);
-      }).catch(err => console.error(err));
+      const updatedSaves = [
+        ...this.props.availableSaves.slice(0, index),
+        ...this.props.availableSaves.slice(index + 1)
+      ];
+      
+      this.storeAvailableSaves(updatedSaves);
     }
   }
   
@@ -148,7 +154,7 @@ class SetupSection extends React.Component {
           </button>
         </li>
         <li className="nav-item">
-          <button className="btn btn-outline-dark btn-sm" onClick={() => this.setState({ showLoadPanel: true })}>
+          <button className="btn btn-outline-dark btn-sm" onClick={this.loadAvailableSaves}>
             Load Setup
           </button>
         </li>
@@ -176,7 +182,8 @@ class SetupSection extends React.Component {
       {this.state.showLoadPanel && (
         <Modal
           title="Load Previous Setup"
-          hide={() => this.setState({ showLoadPanel: false })}>
+          hide={() => this.setState({ showLoadPanel: false })}
+        >
           {
             this.props.availableSaves.length < 1
             ? <p>No Setups Saved.</p>
@@ -188,10 +195,11 @@ class SetupSection extends React.Component {
                   <th></th>
                 </tr>
               </thead>
+              <tbody>
               {this.props.availableSaves.map((save, index) => {
                 const date = new Date(save.saved);
                 const dateString = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-                return <tr>
+                return <tr key={save.saved}>
                   <td>
                     <a onClick={() => this.loadSpecificSave(index)} style={{ display: 'block', width: '100%', height: '100%'}}>
                       {save.name}
@@ -207,6 +215,7 @@ class SetupSection extends React.Component {
                   </td>
                 </tr>
               })}
+              </tbody>
             </table>
           }
         </Modal>
@@ -214,7 +223,10 @@ class SetupSection extends React.Component {
       {this.state.showSavePanel && (
         <Modal
           title="Save Current Setup"
-          hide={() => this.setState({ showSavePanel: false })}>
+          hide={() => this.setState({ showSavePanel: false })}
+          confirmButtonText="Save"
+          confirmAction={this.saveCurrentSetup}
+        >
           <p>
             Save the current setup fields to your browser to load next time you visit!
           </p>
