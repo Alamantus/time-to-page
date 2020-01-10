@@ -35,11 +35,11 @@ class App extends React.Component {
             {
               this.state.showSetup === true
               ? (
-                <a href="#" className="btn btn-primary" onClick={this.hideSetup}>
+                <a href="#" className="btn btn-primary" onClick={() => this.setState({ showSetup: false })}>
                   Continue to Calculator &rarr;
                 </a>
               ) : (
-                <a href="#" className="btn btn-primary" onClick={this.showSetup}>
+                <a href="#" className="btn btn-primary" onClick={() => this.setState({ showSetup: true })}>
                   &larr; Go Back to Setup
                 </a>
               )
