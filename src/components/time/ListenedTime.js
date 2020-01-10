@@ -130,13 +130,13 @@ class ListenedTime extends React.Component {
             <ul className="nav">
               <li className="nav-item">
                 <a className={'nav-link btn btn-small' + (this.state.showPercentListened === false && ' btn-primary')}
-                  href="#" onClick={() => this.setState({ showPercentListened: false })}>
+                  onClick={() => this.setState({ showPercentListened: false })}>
                   Time
                 </a>
               </li>
               <li className="nav-item">
                 <a className={'nav-link btn btn-small' + (this.state.showPercentListened === true && ' btn-primary')}
-                  href="#" onClick={() => this.setState({ showPercentListened: true })}>
+                  onClick={() => this.setState({ showPercentListened: true })}>
                   Percent
                 </a>
               </li>
