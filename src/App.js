@@ -9,27 +9,20 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      showAppHelp: false,
       showSetup: true,
     };
-
-    this.showSetup = this.showSetup.bind(this);
-    this.hideSetup = this.hideSetup.bind(this);
-  }
-
-  showSetup () {
-    this.setState({ showSetup: true });
-  }
-
-  hideSetup () {
-    this.setState({ showSetup: false });
   }
 
   render () {
     return <main>
       <Header
+        appHelpIsShown={this.state.showAppHelp}
+        showAppHelp={() => this.setState({ showAppHelp: true })}
+        hideAppHelp={() => this.setState({ showAppHelp: false })}
         setupIsShown={this.state.showSetup}
-        showSetup={this.showSetup}
-        hideSetup={this.hideSetup}
+        showSetup={() => this.setState({ showSetup: true })}
+        hideSetup={() => this.setState({ showSetup: false })}
       />
       {
         this.state.showSetup === true

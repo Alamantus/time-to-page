@@ -7,7 +7,7 @@ const Modal = (props) => {
     role="dialog" aria-labelledby="helpModalLabel"
   >
     <div className="modal-backdrop" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }} onClick={props.hide} />
-    <div className="modal-dialog" style={{ zIndex: 1050 }} role="document">
+    <div className={'modal-dialog' + (props.scrollingBody ? ' modal-dialog-scrollable' : '')} style={{ zIndex: 1050 }} role="document">
       <div className="modal-content">
         <div className="modal-header">
           <h5 className="modal-title" id="helpModalLabel">{props.title}</h5>
