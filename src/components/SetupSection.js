@@ -10,6 +10,10 @@ class SetupSection extends React.Component {
 
     this.state = {
       showFineTuneSection: false,
+      showTotalTimePages: false,
+      showTotalTimeHelp: false,
+      showStartHelp: false,
+      showEndHelp: false,
     };
 
     this.toggleFineTuneSection = this.toggleFineTuneSection.bind(this);
@@ -22,11 +26,25 @@ class SetupSection extends React.Component {
   
   render () {
     return <section className="container-fluid">
-      <TotalPages />
-      <TotalTime />
+      <TotalPages
+        helpIsShown={this.state.showTotalPagesHelp}
+        showHelp={() => this.setState({ showTotalPagesHelp: true })}
+        hideHelp={() => this.setState({ showTotalPagesHelp: false })}
+      />
+      <TotalTime
+        helpIsShown={this.state.showTotalTimeHelp}
+        showHelp={() => this.setState({ showTotalTimeHelp: true })}
+        hideHelp={() => this.setState({ showTotalTimeHelp: false })}
+      />
       <FineTuneTime
         isShown={this.state.showFineTuneSection}
         toggle={this.toggleFineTuneSection}
+        startHelpIsShown={this.state.showStartHelp}
+        showStartHelp={() => this.setState({ showStartHelp: true })}
+        hideStartHelp={() => this.setState({ showStartHelp: false })}
+        endHelpIsShown={this.state.showEndHelp}
+        showEndHelp={() => this.setState({ showEndHelp: true })}
+        hideEndHelp={() => this.setState({ showEndHelp: false })}
       />
     </section>;
   }

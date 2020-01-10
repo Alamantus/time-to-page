@@ -9,6 +9,7 @@ import {
 } from '../../store/actionCreators/time';
 
 import TimeColumns from './TimeColumns';
+import Modal from '../Modal';
 
 const mapStateToProps = (state) => ({
   introMinutes: state.time.intro.minutes,
@@ -26,20 +27,30 @@ const mapDispatchToProps = {
 
 const FineTuneTime = (props) => {
   return <article className="card">
-    <section className="card-body">
+    <div className="card-body">
       <header className="row">
-        <div className="col-md-4">
+        <div className="col-md-auto">
           <h3>Fine-Tune Time</h3>
         </div>
-        <div className="col-md-8">
-          <a className="btn btn-secondary" onClick={props.toggle}>
+        <div className="col-md-auto">
+          <button className="btn btn-secondary" onClick={props.toggle}>
             { props.isShown ? 'Collapse' : 'Expand' }
-          </a>
+          </button>
         </div>
       </header>
       {props.isShown && (
-        <div>
-          <h4>Actual Start Time</h4>
+        <section>
+          <header className="row">
+            <div className="col-md-auto">
+              <h4>Actual Start Time</h4>
+            </div>
+            <div className="col-md-auto">
+              <button className="btn btn-secondary btn-sm" onClick={props.showStartHelp}
+                aria-label="Show Help Modal" title="Show Help Modal">
+                ?
+              </button>
+            </div>
+          </header>
           <TimeColumns
             idPrefix='intro'
             minutes={props.introMinutes}
@@ -47,7 +58,17 @@ const FineTuneTime = (props) => {
             updateMinutes={props.updateIntroMinutes}
             updateSeconds={props.updateIntroSeconds}
           />
-          <h4>Time After Book Ends</h4>
+          <header className="row">
+            <div className="col-md-auto">
+              <h4>Time After Book Ends</h4>
+            </div>
+            <div className="col-md-auto">
+              <button className="btn btn-secondary btn-sm" onClick={props.showEndHelp}
+                aria-label="Show Help Modal" title="Show Help Modal">
+                ?
+              </button>
+            </div>
+          </header>
           <TimeColumns
             idPrefix='outro'
             minutes={props.outroMinutes}
@@ -55,9 +76,32 @@ const FineTuneTime = (props) => {
             updateMinutes={props.updateOutroMinutes}
             updateSeconds={props.updateOutroSeconds}
           />
-        </div>
+        </section>
       )}
-    </section>
+    </div>
+    {props.startHelpIsShown && (
+      <Modal title="Actual Start Time Help" hide={props.hideStartHelp}>
+        <p>
+        Some audiobooks have some kind of introduction, maybe saying who produced or is
+        reading the book. Set this to align with when the first word of the first page
+        in the book is read to fine-tune your position.
+        </p>
+      </Modal>
+    )}
+    {props.endHelpIsShown && (
+      <Modal title="Time After Book Ends" hide={props.hideEndHelp}>
+        <p>
+        Some audiobooks have some kind of ending or afterword, maybe thanking you for
+        listening or something like that. Specify how much time passes from when the
+        last word of the book is read until the very end of the recording to fine-tune
+        your position.
+        </p>
+        <p>
+          Alternately, you can just set the "Total Audiobook Time" field to when the
+          audio reaches the last word on the last page of the book.
+        </p>
+      </Modal>
+    )}
   </article>;
 }
 

@@ -31,8 +31,16 @@ const TotalPages = (props) => {
 
   return <article className="card">
     <section className="card-body">
-      <header>
-        <h2>Book Pages</h2>
+      <header className="row">
+        <div className="col-md-auto">
+          <h2>Book Pages</h2>
+        </div>
+        <div className="col-md-auto">
+          <button className="btn btn-secondary btn-sm" onClick={props.showHelp}
+            aria-label="Show Help Modal" title="Show Help Modal">
+            ?
+          </button>
+        </div>
       </header>
       <article className="row">
         <div className="col form-group">
@@ -55,6 +63,14 @@ const TotalPages = (props) => {
         </div>
       </article>
     </section>
+    {props.helpIsShown && (
+      <Modal title="Book Pages Help" hide={props.hideHelp}>
+        <p>
+          Some books have extra text or afterwords after the main text of the
+          book has ended. Enter the last page number of the main text here.
+        </p>
+      </Modal>
+    )}
   </article>;
 }
 
