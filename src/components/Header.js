@@ -41,7 +41,6 @@ Header.propTypes = {
   setupIsShown: PropTypes.bool.isRequired,
   showSetup: PropTypes.func.isRequired,
   hideSetup: PropTypes.func.isRequired,
-  showHelp: PropTypes.func.isRequired,
 }
 
 export default Header;

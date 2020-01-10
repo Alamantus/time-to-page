@@ -1,57 +1,20 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import {
-  updateReadPages,
-} from '../../store/actionCreators/pages';
-import {
-  updateListenedTime,
-  updateListenedPercent,
-} from '../../store/actionCreators/time';
-
-import {
-  CalculateSeconds,
-  GetTotalSeconds,
-  GetPercentProgress,
-  GetCurrentTimeFromPage,
-} from '../../Calculator';
-
-const mapStateToProps = (state) => ({
-  currentPage: state.pages.read,
-  totalPages: state.pages.total,
-  startPage: state.pages.start,
-  totalTime: state.time.total,
-  introTime: state.time.intro,
-  outroTime: state.time.outro,
-});
-
-const mapDispatchToProps = {
-  updatePage: updateReadPages,
-  updateListenedTime,
-  updateListenedPercent,
-};
+import Modal from '../Modal';
 
 const CurrentPage = (props) => {
-  const updatePage = value => {
-    if (isNaN(value) || value < 0) value = 0;
-    if (value > props.totalPages) {
-      value = props.totalPages;
-    }
-    props.updatePage(value);
-
-    const { totalPages, startPage, totalTime, introTime, outroTime } = props;
-    const totalSeconds = GetTotalSeconds(totalTime, introTime, outroTime),
-      introSeconds = CalculateSeconds(introTime);
-
-    const listenedTime = GetCurrentTimeFromPage(value, totalPages, startPage, totalSeconds, introSeconds);
-    props.updateListenedTime(listenedTime);
-    props.updateListenedPercent(GetPercentProgress(value, totalPages));
-  }
-  
   return <article className="card">
     <section className="card-body">
-      <header>
-        <h2>Current Page</h2>
+      <header className="row">
+        <div className="col-md-auto">
+          <h2>Current Page</h2>
+        </div>
+        <div className="col-md-auto">
+          <button className="btn btn-secondary btn-sm" onClick={props.showHelp}
+            aria-label="Show Help Modal" title="Show Help Modal">
+            ?
+          </button>
+        </div>
       </header>
       <article className="form-group">
         <label htmlFor="readPages">Page Number</label>
@@ -59,11 +22,20 @@ const CurrentPage = (props) => {
           type="number" step="0.01" min="0" max={props.totalPages}
           value={props.currentPage}
           onFocus={event => event.target.select()}
-          onChange={event => updatePage(parseFloat(event.target.value))}
+          onChange={event => props.updatePage(parseFloat(event.target.value))}
         />
       </article>
     </section>
+    {props.helpIsShown && (
+      <Modal title="Current Page Help" hide={props.hideHelp}>
+        <p>
+          You can estimate your page position up to 2 decimal places, though
+          it might still take a little bit of adjustment to find exactly where
+          on the page you are.
+        </p>
+      </Modal>
+    )}
   </article>;
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentPage);
+export default CurrentPage;
