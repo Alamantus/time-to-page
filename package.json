@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "parcel index.html --out-dir dev --no-hmr",
-    "build": "parcel build index.html --out-dir docs --no-source-maps --experimental-scope-hoisting"
+    "build": "parcel build index.html --out-dir docs --public-url . --no-source-maps --experimental-scope-hoisting"
   },
   "dependencies": {
     "bootstrap": "^4.4.1",

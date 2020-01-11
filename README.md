@@ -11,3 +11,5 @@ Finally, this version of the Time-to-Page calculator was written in React+Redux 
 ## Development
 
 Install with `yarn`, test with `npm run dev`, and build with `npm run build`. Building sends it to `/docs`, which GitHub uses to render its pages.
+
+There's some tomfoolery with parcel not putting the calculator.js output into the correct `old-version` folder, so after building, you need to move it from `/docs` to `/docs/old-version`. I'll figure out how to fix that later, but for now, tada!
