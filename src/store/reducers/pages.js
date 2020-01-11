@@ -6,8 +6,8 @@ import {
 
 const defaultState = {
   read: 0,
-  total: 0,
-  start: 0,
+  total: 183,
+  start: 1,
 };
 
 const reducer = (state = defaultState, action) => {

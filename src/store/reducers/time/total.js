@@ -6,9 +6,9 @@ import {
 } from '../../actions/time';
 
 const defaultState = {
-  seconds: 0,
-  minutes: 0,
-  hours: 0,
+  seconds: 38,
+  minutes: 11,
+  hours: 6,
 };
 
 const reducer = (state = defaultState, action) => {
