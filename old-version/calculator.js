@@ -108,7 +108,7 @@ function UpdateCurrentTime () {
     prevListenedHours = hours.toString();
 }
 
-function CheckInput ()
+window.CheckInput = function ()
 {
     var updatePages = false;
     var updateTime = false;
