@@ -10,4 +10,4 @@ Finally, this version of the Time-to-Page calculator was written in React+Redux 
 
 ## Development
 
-Install with `yarn`, test with `npm run dev`, and build with `npm run build`.
+Install with `yarn`, test with `npm run dev`, and build with `npm run build`. Building sends it to `/docs`, which GitHub uses to render its pages.
